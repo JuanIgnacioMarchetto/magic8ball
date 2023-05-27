@@ -20,4 +20,19 @@ $(document).ready(function() {
   
     $("#questionButton").click(truco);
   });
+
+  // Evento de agitar la Magic 8 Ball al mover el dispositivo en la versión móvil
+if (window.DeviceOrientationEvent) {
+    window.addEventListener("deviceorientation", function (event) {
+      if (
+        event.beta > 20 ||
+        event.beta < -20 ||
+        event.gamma > 20 ||
+        event.gamma < -20
+      ) {
+        agitarMagic8Ball();
+        window.removeEventListener("deviceorientation", arguments.callee); // Remover el evento después de la primera activación
+      }
+    });
+  }
   
